@@ -3,6 +3,7 @@ import "./App.css";
 import api from "./api";
 import AddProduct from "./components/AddProduct";
 import ProductsList from "./components/ProductsList";
+import HeroSection from "./components/HeroSection";
 
 function App() {
     const [currentPage, setCurrentPage] = useState("view");
@@ -55,17 +56,35 @@ function App() {
                 </nav>
             </header>
 
-            <main className="main-content">
-                {currentPage === "add" ? (
-                    <AddProduct onAddProduct={addProduct} />
-                ) : loading ? (
-                    <p style={{ textAlign: "center", marginTop: "2rem" }}>Loading watches...</p>
-                ) : error ? (
-                    <p style={{ textAlign: "center", color: "red", marginTop: "2rem" }}>{error}</p>
-                ) : (
-                    <ProductsList products={products} />
-                )}
-            </main>
+            {currentPage === "add" ? (
+                <div className="add-page-layout">
+                    <div className="hero-background-layer">
+                        <HeroSection />
+                    </div>
+
+                    <div className="content-overlay-layer">
+                        <main className="main-content">
+                            <AddProduct onAddProduct={addProduct} />
+                        </main>
+                    </div>
+                </div>
+            ) : (
+                <div className="view-page-layout">
+                    <HeroSection />
+
+                    <div className="normal-content">
+                        <main className="main-content">
+                            {loading ? (
+                                <p style={{ textAlign: "center", marginTop: "2rem" }}>Loading watches...</p>
+                            ) : error ? (
+                                <p style={{ textAlign: "center", color: "red", marginTop: "2rem" }}>{error}</p>
+                            ) : (
+                                <ProductsList products={products} />
+                            )}
+                        </main>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }

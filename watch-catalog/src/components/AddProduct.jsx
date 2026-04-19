@@ -36,6 +36,8 @@ const AddProduct = ({ onAddProduct }) => {
         return Object.keys(newErrors).length === 0;
     };
 
+
+    
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData((prev) => ({
@@ -167,7 +169,7 @@ const AddProduct = ({ onAddProduct }) => {
                             name="image_url"
                             value={formData.image_url}
                             onChange={handleChange}
-                            placeholder="https://example.com/watch-image.jpg"
+                           placeholder="https://example.com/watch-image.jpg"
                         />
                     </div>
 
